@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 
+import Header from "./Header/Header.jsx";
 import Player from "./Player/Player";
 import GameBoard from "./GameBoard/GameBoard";
 import GameOver from "./GameOver.jsx/GameOver.jsx";
@@ -99,29 +100,32 @@ function App() {
   }
 
   return (
-    <main>
-      <div id="game-container">
-        <ol id="players" className="highlight-player">
-          <Player
-            initialName={PLAYERS.X}
-            symbol={Object.keys(PLAYERS)[0]}
-            isActive={activePlayer === "X"}
-            onChangeName={handlePlayerNameChange}
-          />
-          <Player
-            initialName={PLAYERS.O}
-            symbol={Object.keys(PLAYERS)[1]}
-            isActive={activePlayer === "O"}
-            onChangeName={handlePlayerNameChange}
-          />
-        </ol>
-        {(winner || hasDraw) && (
-          <GameOver winner={winner} onRestart={handleRematch} />
-        )}
-        <GameBoard onSelectSquare={handleSelectSquer} bord={gameBoard} />
-      </div>
-      <Log logTurns={gameTurns} />
-    </main>
+    <Fragment>
+      <Header />
+      <main>
+        <div id="game-container">
+          <ol id="players" className="highlight-player">
+            <Player
+              initialName={PLAYERS.X}
+              symbol={Object.keys(PLAYERS)[0]}
+              isActive={activePlayer === "X"}
+              onChangeName={handlePlayerNameChange}
+            />
+            <Player
+              initialName={PLAYERS.O}
+              symbol={Object.keys(PLAYERS)[1]}
+              isActive={activePlayer === "O"}
+              onChangeName={handlePlayerNameChange}
+            />
+          </ol>
+          {(winner || hasDraw) && (
+            <GameOver winner={winner} onRestart={handleRematch} />
+          )}
+          <GameBoard onSelectSquare={handleSelectSquer} bord={gameBoard} />
+        </div>
+        <Log logTurns={gameTurns} />
+      </main>
+    </Fragment>
   );
 }
 
